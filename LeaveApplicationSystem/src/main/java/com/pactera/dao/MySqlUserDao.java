@@ -17,10 +17,10 @@ public class MySqlUserDao implements UserDao {
 		try {
 			statement = connection.prepareStatement(sqlStatement);
 			statement.setString(1, user.getUserName());
-			statement.setString(1, user.getPassword());
-			statement.setString(1, user.getFname());
-			statement.setString(1, user.getMname());
-			statement.setString(1, user.getLname());
+			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getFname());
+			statement.setString(4, user.getMname());
+			statement.setString(5, user.getLname());
 
 			rows = statement.executeUpdate();
 		} catch (SQLException e) {
@@ -92,5 +92,38 @@ public class MySqlUserDao implements UserDao {
 			}
 		}
 		return user;
+	}
+
+	public boolean updateUser(int userId, String firstName) {
+		Connection connection = MySqlDaoFactory.createConnection();
+		PreparedStatement statement = null;
+		int rows = 0;
+		String sqlStatement = "UPDATE lar_user SET first_name = ? "
+				+ "WHERE user_id = ?";
+		try {
+			statement = connection.prepareStatement(sqlStatement);
+			statement.setString(1, firstName);
+			statement.setInt(2, userId);
+
+			rows = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (null != statement) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != connection) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return (1 == rows);
 	}
 }

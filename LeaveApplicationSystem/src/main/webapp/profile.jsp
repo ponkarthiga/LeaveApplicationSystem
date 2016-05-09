@@ -55,36 +55,40 @@
         <div id="content">
 
 <%
-UserBean user = (UserBean) request.getAttribute("user");
-user = (null == user) ? (new UserBean()) : user;
+UserBean userB = (UserBean) request.getAttribute("userA");
+userB = (null == userB) ? (new UserBean()) : userB;
 %>
             <h2>Profile</h2>
-
+<form method="post" action="profile.do">
           	<table>
           		<tbody>
           			<tr>
           				<td>ID</td>
-          				<td><%=user.getUserId() %></td>
+          				<td><input type="text" name="userId" value="<%=userB.getUserId() %>"/></td>
           			</tr>
           			<tr>
           				<td>Name</td>
-          				<td><%=user.getUserName() %></td>
+          				<td><%=userB.getUserName() %></td>
           			</tr>
           			<tr>
           				<td>First Name</td>
-          				<td><%=user.getFname() %></td>
+          				<td><input type="text" name="firstName" value="<%=userB.getFname() %>"/></td>
           			</tr>
           			<tr>
           				<td>Middle Name</td>
-          				<td><%=user.getMname() %></td>
+          				<td><%=userB.getMname() %></td>
           			</tr>
           			<tr>
           				<td>Last Name</td>
-          				<td><%=user.getLname() %></td>
+          				<td><%=userB.getLname() %></td>
+          			</tr>
+          			<tr>
+          				<td><input type="submit" value="Update" /></td>
+          				<td></td>
           			</tr>
           		</tbody>
           	</table>
-
+</form>
         </div>
 
     </div>

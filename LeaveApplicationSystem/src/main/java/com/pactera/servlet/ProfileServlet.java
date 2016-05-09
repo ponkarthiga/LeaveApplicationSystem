@@ -1,10 +1,15 @@
 package com.pactera.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.pactera.dao.DaoFactory;
+import com.pactera.dao.UserDao;
 
 /**
  * Servlet implementation class ProfileServlet
@@ -12,12 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    DaoFactory daoFactory = null;
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+        // initialize DAO factory
+        daoFactory = DaoFactory.getDaoFactory(DaoFactory.MYSQL);
     }
 
 	/**
@@ -31,7 +43,13 @@ public class ProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		UserDao userDao = daoFactory.getUserDao();
+		
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		String firstName = request.getParameter("firstName");
+		
+		userDao.updateUser(userId, firstName);
+		
 		doGet(request, response);
 	}
 
