@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class MySqlDaoFactory extends DaoFactory {
 	/** The JDBC driver for MySQL. */
-	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
 	/** The MySQL database URL. */
-	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/lar";
+	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/lar?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	/** The MySQL database username. */
 	private static final String DATABASE_USER = "root";

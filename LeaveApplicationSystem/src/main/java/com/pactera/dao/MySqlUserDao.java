@@ -49,7 +49,7 @@ public class MySqlUserDao implements UserDao {
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		String sqlStatement = "SELECT user_id, user_name, user_pass, first_name, middle_name, last_name"
-				+ " FROM lar_user WHERE username=?";
+				+ " FROM lar_user WHERE user_name=?";
 		UserBean user = null;
 		try {
 			statement = connection.prepareStatement(sqlStatement);
@@ -58,7 +58,12 @@ public class MySqlUserDao implements UserDao {
 			result = statement.executeQuery();
 			if (result.next()) {
 				user = new UserBean();
-				user.setUserName(result.getString(1));
+				user.setUserId(result.getInt(1));
+				user.setUserName(result.getString(2));
+				user.setPassword(result.getString(3));
+				user.setFname(result.getString(4));
+				user.setMname(result.getString(5));
+				user.setLname(result.getString(6));
 
 			}
 		} catch (SQLException e) {

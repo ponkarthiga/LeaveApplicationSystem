@@ -60,9 +60,8 @@ public class LoginServlet extends HttpServlet {
 		if (user.getPassword().equals(request.getParameter("pass"))) {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user", user);
-	        response.sendRedirect(request.getRequestURL().toString().replaceFirst("login","profile"));
-	        
-			doGet(request, response);
+	        request.setAttribute("user", user);
+	        request.getRequestDispatcher("profile.jsp").forward(request, response);
 		}
 	}
 

@@ -1,18 +1,18 @@
 package com.pactera.bean;
 
 public class UserBean {
-	private String userId;
+	private int userId;
 	private String userName;
 	private String password;
 	private String fname;
 	private String mname;
 	private String lname;
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
