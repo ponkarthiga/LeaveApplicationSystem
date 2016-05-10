@@ -36,6 +36,13 @@ public class ProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String test = (String) request.getParameter("user_id");
+		
+		if (test.equals("") || test != null) {
+			UserDao userDao = daoFactory.getUserDao();
+			
+			userDao.updateUser(Integer.parseInt(test), "test");
+		}
 		request.getRequestDispatcher("profile.jsp").forward(request, response);
 	}
 

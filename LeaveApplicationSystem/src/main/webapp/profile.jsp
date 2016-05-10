@@ -1,4 +1,4 @@
-<%@ page import="com.pactera.bean.*" %>
+<%@ page import="com.pactera.bean.*, java.util.List" %>
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -57,6 +57,9 @@
 <%
 UserBean userB = (UserBean) request.getAttribute("userA");
 userB = (null == userB) ? (new UserBean()) : userB;
+
+List<UserBean> listOfUsers = (List<UserBean>) request.getAttribute("listOfUsers");
+
 %>
             <h2>Profile</h2>
 <form method="post" action="profile.do">
@@ -87,6 +90,23 @@ userB = (null == userB) ? (new UserBean()) : userB;
           				<td></td>
           			</tr>
           		</tbody>
+          	</table>
+          	
+          	<table>
+          		<% 
+          			for (UserBean user : listOfUsers) {
+          		%>
+          		<tr>
+          			<td><%= user.getUserId() %></td>
+          			<td><%= user.getUserName() %></td>
+          			<td><%= user.getFname() %></td>
+          			<td><%= user.getMname() %></td>
+          			<td><%= user.getLname() %></td>
+          			<td><a href="profile.do?user_id=<%= user.getUserId() %>">Edit</a></td>
+          		</tr>
+          		<%
+          			}
+          		%>
           	</table>
 </form>
         </div>

@@ -1,6 +1,7 @@
 package com.pactera.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -46,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -56,11 +57,13 @@ public class LoginServlet extends HttpServlet {
 		UserDao userDao = daoFactory.getUserDao();
 		
 		UserBean user = userDao.retrieveUser(request.getParameter("user"));
+		List<UserBean> listOfUsers = (List<UserBean>) userDao.retrieveUsers();
 		
 		if (user.getPassword().equals(request.getParameter("pass"))) {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user", user);
 	        request.setAttribute("userA", user);
+	        request.setAttribute("listOfUsers", listOfUsers);
 	        request.getRequestDispatcher("profile.jsp").forward(request, response);
 		}
 	}

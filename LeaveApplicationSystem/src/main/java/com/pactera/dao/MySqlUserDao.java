@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 
 import com.pactera.bean.UserBean;
 
@@ -125,5 +127,57 @@ public class MySqlUserDao implements UserDao {
 			}
 		}
 		return (1 == rows);
+	}
+
+	public List<UserBean> retrieveUsers() {
+		Connection connection = MySqlDaoFactory.createConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		String sqlStatement = "SELECT * FROM lar_user";
+		UserBean user = null;
+		
+		List<UserBean> listOfUsers = new Vector<UserBean>();
+		
+		try {
+			statement = connection.prepareStatement(sqlStatement);
+
+			result = statement.executeQuery();
+			while (result.next()) {
+				user = new UserBean();
+				user.setUserId(result.getInt(1));
+				user.setUserName(result.getString(2));
+				user.setPassword(result.getString(3));
+				user.setFname(result.getString(4));
+				user.setMname(result.getString(5));
+				user.setLname(result.getString(6));
+				
+				listOfUsers.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (null != result) {
+				try {
+					result.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != statement) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != connection) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return listOfUsers;
 	}
 }
