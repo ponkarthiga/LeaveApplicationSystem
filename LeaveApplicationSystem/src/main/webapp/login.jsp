@@ -32,11 +32,11 @@
                         <tbody>
                         <tr>
                             <td><label for="user">Username</label></td>
-                            <td><input type="text" name="user" id="user" maxlength="50" value="" /></td>
+                            <td><input type="text" name="user" id="user" maxlength="50" value="" required /></td>
                         </tr>
                         <tr>
                             <td><label for="pass">Password</label></td>
-                            <td><input type="password" name="pass" id="pass" /></td>
+                            <td><input type="password" name="pass" id="pass"  required/></td>
                         </tr>
                         </tbody>
                     </table>

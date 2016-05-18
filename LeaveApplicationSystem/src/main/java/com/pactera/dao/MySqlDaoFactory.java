@@ -9,7 +9,7 @@ public class MySqlDaoFactory extends DaoFactory {
 	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
 	/** The MySQL database URL. */
-	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/lar?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/my_schema?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 	/** The MySQL database username. */
 	private static final String DATABASE_USER = "root";
@@ -46,5 +46,14 @@ public class MySqlDaoFactory extends DaoFactory {
      */
     public UserDao getUserDao() {
         return new MySqlUserDao();
+    }
+    
+    /**
+     * Returns the DAO for <code>LeaveBean</code> object instances.
+     *
+     * @return  the DAO for <code>LeaveBean</code>
+     */
+    public LeaveDao getLeaveDao(){
+    	return new MySqlLeaveDao();
     }
 }
