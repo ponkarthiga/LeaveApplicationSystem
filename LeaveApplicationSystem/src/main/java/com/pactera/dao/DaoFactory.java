@@ -29,4 +29,10 @@ public abstract class DaoFactory {
      * @return  the DAO for <code>UserBean</code>
      */
     public abstract UserDao getUserDao();
+    
+    public abstract LoginDao getLoginDao();
+    
+    public abstract LeaveEntitlementDao getLeaveEntitlementDao();
+    
+    public abstract ParameterDao getParameterDao();
 }
